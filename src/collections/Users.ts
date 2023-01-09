@@ -1,10 +1,20 @@
-import {CollectionConfig} from 'payload/types';
+import {Access, CollectionConfig} from 'payload/types';
+
+const demoUserAccess: Access = ({req: {user}}) => {
+  if (!user) return false;
+
+  return {id: {not_equals: user.id}};
+};
 
 const Users: CollectionConfig = {
   slug: 'users',
-  auth: true,
   admin: {useAsTitle: 'email', group: 'Admin'},
-  access: {read: () => true},
+  auth: {useAPIKey: true},
+  access: {
+    read: () => true,
+    update: demoUserAccess,
+    delete: demoUserAccess,
+  },
   fields: [
     // Email added by default
     {
@@ -18,6 +28,14 @@ const Users: CollectionConfig = {
     {
       name: 'username',
       type: 'text',
+      saveToJWT: true,
+    },
+    {
+      name: 'role',
+      type: 'select',
+      options: ['user', 'editor', 'manager', 'admin'],
+      required: true,
+      saveToJWT: true,
     },
   ],
 };

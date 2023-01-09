@@ -55,18 +55,16 @@ export const transformCardField = card => ({
 });
 
 export const transformDoc = doc => ({
-  doc: {
-    _id: doc.id,
-    title: doc.title,
-    slug: doc.slug,
-    excerpt: doc.excerpt,
-    blocks: doc.blocks,
-    meta: {
-      title: doc.meta.title,
-      description: doc.meta.description,
-      keywords: '',
-      image: transformImageField(doc.meta.image),
-    },
+  _id: doc.id,
+  title: doc.title,
+  slug: doc.slug,
+  excerpt: doc.excerpt,
+  blocks: doc.blocks,
+  meta: {
+    title: doc.meta.title,
+    description: doc.meta.description,
+    keywords: '',
+    image: transformImageField(doc.meta.image),
   },
 });
 

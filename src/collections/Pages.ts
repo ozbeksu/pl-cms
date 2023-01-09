@@ -12,13 +12,17 @@ import {
   Listing,
   Slider,
 } from '../blocks';
-import {blog, blogSingle} from '../endpoints/pages';
+import {findBySlug} from '../endpoints/pages';
 import {slugifyOnValidate} from '../hooks';
+// import {STATUS_TYPES} from '../utils/enums';
+import {isLoggedInUser} from '../utils/helpers';
 
 const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {useAsTitle: 'title', group: 'Content'},
-  access: {read: () => true},
+  access: {read: ({req: {user}}) => isLoggedInUser(user)},
+  versions: {drafts: true},
+  endpoints: [{path: '/content/:slug', method: 'get', handler: findBySlug}],
   fields: [
     {
       type: 'tabs',
@@ -77,6 +81,7 @@ const Pages: CollectionConfig = {
                   type: 'relationship',
                   relationTo: 'users',
                   admin: {width: '50%'},
+                  defaultValue: ({user}) => user.id,
                 },
                 {
                   name: 'category',
@@ -113,6 +118,7 @@ const Pages: CollectionConfig = {
                   name: 'publishedAt',
                   type: 'date',
                   admin: {width: '50%'},
+                  defaultValue: () => new Date(),
                 },
               ],
             },
@@ -145,18 +151,6 @@ const Pages: CollectionConfig = {
           fields: [createBreadcrumbsField('pages')],
         },
       ],
-    },
-  ],
-  endpoints: [
-    {
-      path: '/blog',
-      method: 'get',
-      handler: blog,
-    },
-    {
-      path: '/blog/:slug',
-      method: 'get',
-      handler: blogSingle,
     },
   ],
 };

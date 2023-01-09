@@ -8,6 +8,14 @@ export type GenerateTitle = {title: {value: string}};
 
 export type GenerateDescription = {excerpt: {value: string}};
 
+export type Listing = {
+  relationTo: string;
+  value: {
+    slug: string;
+    [key: string]: any;
+  };
+};
+
 export type MediaSize = {
   url?: string;
   width?: number;

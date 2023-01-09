@@ -167,3 +167,4 @@ dist
 node_modules
 dist
 *.log
+media/

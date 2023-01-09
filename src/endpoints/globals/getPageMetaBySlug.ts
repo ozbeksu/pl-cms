@@ -1,15 +1,14 @@
 import {errorMessage} from '../../utils/helpers';
-import {blockReducer} from '../../utils/reducers';
-import {transformDoc} from '../../utils/transformers';
+import {transformImageField} from '../../utils/transformers';
 
 export default async (req, res) => {
-  const query = {slug: {equals: 'blog'}};
+  const slug = req.params?.slug;
+  const query = {slug: {equals: slug}};
 
   const data = await req.payload
     .find({collection: 'pages', pagination: false, where: query})
     .catch(err => {
       console.log(err);
-
       res.status(404).send(errorMessage);
     });
 
@@ -19,7 +18,12 @@ export default async (req, res) => {
     return;
   }
 
-  const doc = await blockReducer(data.docs[0], req.payload);
-
-  res.status(200).send(transformDoc(doc));
+  res.status(200).send({
+    title: data.docs[0]?.title,
+    slug,
+    meta: {
+      ...data.docs[0]?.meta,
+      image: transformImageField(data.docs[0]?.meta?.image),
+    },
+  });
 };

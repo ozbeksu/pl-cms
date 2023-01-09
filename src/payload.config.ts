@@ -31,11 +31,9 @@ export default buildConfig({
 
   globals: [Settings],
 
-  rateLimit: {
-    trustProxy: true,
-    window: 2 * 60 * 1000, // 2 minutes
-    max: 2400, // limit each IP per windowMs
-  },
+  rateLimit: {trustProxy: true, window: 2 * 60 * 1000, max: 2400},
+
+  cors: '*',
 
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
@@ -47,7 +45,7 @@ export default buildConfig({
   },
 
   routes: {
-    api: '/api',
+    api: '/api/v1',
     admin: '/admin',
     graphQL: '/graphql',
     graphQLPlayground: '/graphql-playground',

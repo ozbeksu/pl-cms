@@ -1,4 +1,3 @@
-import blog from './blog';
-import blogSingle from './blogSingle';
+import findBySlug from './findBySlug';
 
-export {blog, blogSingle};
+export {findBySlug};

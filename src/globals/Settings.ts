@@ -1,9 +1,12 @@
 import {GlobalConfig} from 'payload/types';
 
+import {getPageMetaBySlug} from '../endpoints/globals';
+
 const Settings: GlobalConfig = {
   slug: 'settings',
   label: {singular: 'Setting', plural: 'Settings'},
   admin: {group: 'Globals'},
+  endpoints: [{path: '/meta/:slug', method: 'get', handler: getPageMetaBySlug}],
   fields: [
     {
       type: 'tabs',

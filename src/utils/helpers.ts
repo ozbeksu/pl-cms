@@ -1,5 +1,14 @@
+import {Listing} from '../types';
 import {STATUS_TYPES} from './enums';
 import {transformImageField} from './transformers';
+
+/**
+ * 401 Response
+ */
+export const unauthorizedMessage = {
+  message: 'Unauthorized',
+  error: 401,
+};
 
 /**
  * 404 Response
@@ -9,20 +18,18 @@ export const errorMessage = {
   error: 404,
 };
 
-type Listing = {
-  relationTo: string;
-  value: {
-    slug: string;
-    [key: string]: any;
-  };
-};
-
-const listingMap = {
-  categories: 'category',
-  tags: 'tag',
-};
+/**
+ * @param {{email?: string}} user
+ * @returns {boolean}
+ */
+export const isLoggedInUser = user => user && user?.email;
 
 export const getItemsByListing = async (payload: any, listing: Listing) => {
+  const listingMap = {
+    categories: 'category',
+    tags: 'tag',
+  };
+
   const where = {
     and:
       listing && listing.relationTo

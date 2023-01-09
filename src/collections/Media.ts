@@ -4,7 +4,12 @@ import {FILE_MIME_TYPES} from '../utils/enums';
 
 const Media: CollectionConfig = {
   slug: 'media',
-  access: {read: () => true},
+  access: {
+    read: () => true,
+    create: () => false,
+    update: () => false,
+    delete: () => false,
+  },
   admin: {useAsTitle: 'title', group: 'Content'},
   fields: [
     {

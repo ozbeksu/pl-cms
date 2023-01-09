@@ -15,4 +15,3 @@ export const slugifyOnValidate = (
   siblingData[slugifyFrom] = String(siblingData[slugifyFrom]).trim();
   siblingData[fieldName] = slug(siblingData[slugifyFrom]);
 };
-
