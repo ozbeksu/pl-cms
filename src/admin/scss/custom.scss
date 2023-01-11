@@ -8,3 +8,7 @@ body,
   border: 1px solid var(--theme-elevation-100) !important;
   border-radius: 0 !important;
 }
+
+.site-description {
+  max-height: 132px;
+}

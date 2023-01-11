@@ -20,7 +20,8 @@ import {isLoggedInUser} from '../utils/helpers';
 const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {useAsTitle: 'title', group: 'Content'},
-  access: {read: ({req: {user}}) => isLoggedInUser(user)},
+  // access: {read: ({req: {user}}) => isLoggedInUser(user)},
+  access: {read: () => true},
   versions: {drafts: true},
   endpoints: [{path: '/content/:slug', method: 'get', handler: findBySlug}],
   fields: [

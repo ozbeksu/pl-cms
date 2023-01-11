@@ -1,3 +1,4 @@
+import getGlobalSettings from './getGlobalSettings';
 import getPageMetaBySlug from './getPageMetaBySlug';
 
-export {getPageMetaBySlug};
+export {getGlobalSettings, getPageMetaBySlug};

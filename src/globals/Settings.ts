@@ -1,16 +1,51 @@
 import {GlobalConfig} from 'payload/types';
 
-import {getPageMetaBySlug} from '../endpoints/globals';
+import {getPageMetaBySlug, getGlobalSettings} from '../endpoints/globals';
 
 const Settings: GlobalConfig = {
   slug: 'settings',
   label: {singular: 'Setting', plural: 'Settings'},
+  access: {read: () => true},
   admin: {group: 'Globals'},
-  endpoints: [{path: '/meta/:slug', method: 'get', handler: getPageMetaBySlug}],
+  endpoints: [
+    {path: '/', method: 'get', handler: getGlobalSettings},
+    {path: '/meta/:slug', method: 'get', handler: getPageMetaBySlug}
+  ],
   fields: [
     {
       type: 'tabs',
       tabs: [
+        {
+          label: 'General',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'mainMenu',
+                  type: 'relationship',
+                  relationTo: 'navigations',
+                  localized: true,
+                  admin: {width: '50%'},
+                },
+
+                {
+                  name: 'mobileMenu',
+                  type: 'relationship',
+                  relationTo: 'navigations',
+                  localized: true,
+                  admin: {width: '50%'},
+                },
+              ],
+            },
+            {
+              name: 'enableLogin',
+              label: 'Enable website Login and Register',
+              type: 'checkbox',
+              defaultValue: false,
+            },
+          ],
+        },
         {
           label: 'Meta',
           fields: [
@@ -22,6 +57,9 @@ const Settings: GlobalConfig = {
                   type: 'text',
                   localized: true,
                   required: true,
+                  admin: {width: '50%'},
+                  minLength: 50,
+                  maxLength: 60,
                 },
                 {
                   name: 'siteKeywords',
@@ -29,13 +67,17 @@ const Settings: GlobalConfig = {
                   localized: true,
                   required: true,
                   admin: {width: '50%'},
+                  minLength: 50,
+                  maxLength: 60,
                 },
                 {
                   name: 'siteDescription',
                   type: 'textarea',
                   localized: true,
                   required: true,
-                  admin: {width: '50%'},
+                  admin: {width: '50%', className: 'site-description'},
+                  minLength: 100,
+                  maxLength: 150,
                 },
                 {
                   name: 'siteImage',
@@ -44,6 +86,7 @@ const Settings: GlobalConfig = {
                   required: true,
                   localized: true,
                   filterOptions: {mimeType: {contains: 'image'}},
+                  admin: {width: '50%'},
                 },
               ],
             },
@@ -59,35 +102,30 @@ const Settings: GlobalConfig = {
                   name: 'facebook',
                   type: 'text',
                   localized: true,
-                  required: true,
                   admin: {width: '50%'},
                 },
                 {
                   name: 'twitter',
                   type: 'text',
                   localized: true,
-                  required: true,
                   admin: {width: '50%'},
                 },
                 {
                   name: 'instagram',
                   type: 'text',
                   localized: true,
-                  required: true,
                   admin: {width: '50%'},
                 },
                 {
                   name: 'discord',
                   type: 'text',
                   localized: true,
-                  required: true,
                   admin: {width: '50%'},
                 },
                 {
                   name: 'youtube',
                   type: 'text',
                   localized: true,
-                  required: true,
                   admin: {width: '50%'},
                 },
               ],

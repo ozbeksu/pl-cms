@@ -78,6 +78,25 @@ export const transformReferenceField = ({relationTo, value}) => ({
   relationTo,
 });
 
+export const transformGlobals = ({
+  siteTitle,
+  siteKeywords,
+  siteDescription,
+  siteImage,
+  enableLogin,
+  mainMenu,
+  mobileMenu,
+}) => ({
+  title: siteTitle,
+  meta: {
+    description: siteDescription,
+    keywords: siteKeywords,
+    ogImage: transformImageField(siteImage),
+  },
+  settings: {enableLogin},
+  menus: {mainMenu, mobileMenu},
+});
+
 export const transformFileField = ({
   title,
   filename,
