@@ -14,14 +14,12 @@ import {
 } from '../blocks';
 import {findBySlug} from '../endpoints/pages';
 import {slugifyOnValidate} from '../hooks';
-// import {STATUS_TYPES} from '../utils/enums';
 import {isLoggedInUser} from '../utils/helpers';
 
 const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {useAsTitle: 'title', group: 'Content'},
-  // access: {read: ({req: {user}}) => isLoggedInUser(user)},
-  access: {read: () => true},
+  access: {read: ({req: {user}}) => isLoggedInUser(user)},
   versions: {drafts: true},
   endpoints: [{path: '/content/:slug', method: 'get', handler: findBySlug}],
   fields: [

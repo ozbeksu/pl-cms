@@ -19,11 +19,9 @@ export const transformFromField = ({
   redirect,
 });
 
-export const transformImageField = ({
-  title,
-  mimeType,
-  sizes,
-}: Media): TransformedImageField => {
+export const transformImageField = (media: Media): TransformedImageField => {
+  if (!media) return;
+  const {title, mimeType, sizes} = media;
   const newSizes = {};
 
   for (const key in sizes) {

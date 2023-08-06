@@ -10,7 +10,10 @@ const linkField: Field[] = createLinkField();
  * @param {number} maxDepth
  * @returns {Block}
  */
-const createRecursiveLinksBlock = (current = 0, maxDepth = 3): Block => {
+const createRecursiveLinksBlock = (
+  current: number = 0,
+  maxDepth: number = 3,
+): Block => {
   if (current < maxDepth - 1) {
     current++;
     return {

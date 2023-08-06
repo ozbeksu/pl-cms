@@ -2,12 +2,6 @@ import {Form} from '@payloadcms/plugin-form-builder/dist/types';
 
 import {Media} from './payload-types';
 
-export type GenerateURL = {slug: {value: string}};
-
-export type GenerateTitle = {title: {value: string}};
-
-export type GenerateDescription = {excerpt: {value: string}};
-
 export type Listing = {
   relationTo: string;
   value: {

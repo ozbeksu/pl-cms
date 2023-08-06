@@ -1,6 +1,6 @@
 import {Block} from 'payload/types';
 
-import {CallToAction} from '.';
+import {CallToAction} from './index';
 
 const HeroBlock: Block = {
   slug: 'Hero',

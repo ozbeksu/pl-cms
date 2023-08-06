@@ -1,3 +1,4 @@
+import {User} from '../payload-types';
 import {Listing} from '../types';
 import {STATUS_TYPES} from './enums';
 import {transformImageField} from './transformers';
@@ -18,11 +19,8 @@ export const errorMessage = {
   error: 404,
 };
 
-/**
- * @param {{email?: string}} user
- * @returns {boolean}
- */
-export const isLoggedInUser = user => user && user?.email;
+export const isLoggedInUser = (user: User): boolean =>
+  Boolean(user && user?.email);
 
 export const getItemsByListing = async (payload: any, listing: Listing) => {
   const listingMap = {

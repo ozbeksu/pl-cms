@@ -1,13 +1,17 @@
-import {Options} from '@payloadcms/plugin-nested-docs/dist/types';
+import {PluginConfig} from '@payloadcms/plugin-nested-docs/types';
 
-// @ts-ignore
-const nestedDocsPluginConfig: Options = {
+const nestedDocsPluginConfig: PluginConfig = {
   collections: ['categories', 'pages'],
   parentFieldSlug: 'parent',
   breadcrumbsFieldSlug: 'breadcrumbs',
-  generateLabel: <GenerateURL>(_, doc) => doc?.title,
-  generateURL: <GenerateLabel>(docs) =>
-    docs.reduce((url, doc) => `${url}/${doc?.slug}`, ''),
+  generateLabel: (
+    _: Array<Record<string, unknown>>,
+    currentDoc: Record<string, string>,
+  ) => currentDoc?.title,
+  generateURL: (
+    docs: Array<Record<string, unknown>>,
+    _: Record<string, string>,
+  ) => docs.reduce((url, doc) => `${url}/${doc?.slug}`, ''),
 };
 
 export default nestedDocsPluginConfig;

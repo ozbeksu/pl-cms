@@ -1,6 +1,8 @@
 import {Access, CollectionConfig} from 'payload/types';
 
-const demoUserAccess: Access = ({req: {user}}) => {
+import {CounterField} from './../components/CounterField';
+
+const ownerAccess: Access = ({req: {user}}) => {
   if (!user) return false;
 
   return {id: {not_equals: user.id}};
@@ -12,8 +14,8 @@ const Users: CollectionConfig = {
   auth: {useAPIKey: true},
   access: {
     read: () => true,
-    update: demoUserAccess,
-    delete: demoUserAccess,
+    update: ownerAccess,
+    delete: ownerAccess,
   },
   fields: [
     // Email added by default
@@ -31,11 +33,14 @@ const Users: CollectionConfig = {
       saveToJWT: true,
     },
     {
-      name: 'role',
-      type: 'select',
-      options: ['user', 'editor', 'manager', 'admin'],
-      required: true,
-      saveToJWT: true,
+      name: 'count',
+      type: 'ui',
+      label: {en: 'Counter'},
+      admin: {
+        components: {
+          Field: CounterField,
+        },
+      },
     },
   ],
 };
